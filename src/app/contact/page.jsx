@@ -23,7 +23,7 @@ export default function Contact() {
   })
 
   const submitContactMutation = useMutation({
-    mutationFn: async (data: any) => {
+    mutationFn: async (data) => {
       // Simulate API call with mock data
       addContactMessage(data)
       return data
@@ -44,7 +44,7 @@ export default function Contact() {
     },
   })
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data) => {
     submitContactMutation.mutate(data)
   }
 

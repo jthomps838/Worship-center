@@ -29,7 +29,7 @@ export default function PrayerSubmit() {
   })
 
   const submitPrayerMutation = useMutation({
-    mutationFn: async (data: any) => {
+    mutationFn: async (data) => {
       // Simulate API call with mock data
       const newRequest = {
         ...data,
@@ -54,7 +54,7 @@ export default function PrayerSubmit() {
     },
   })
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data) => {
     submitPrayerMutation.mutate(data)
   }
 
