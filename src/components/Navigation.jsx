@@ -11,7 +11,7 @@ export default function Navigation() {
 
   const navItems = [
     { href: "/", label: "Home" },
-    { href: "/prayer/wall", label: "Prayer Wall" },
+    { href: "/prayer-wall", label: "Prayer Wall" },
     { href: "/about", label: "About" },
     { href: "/media", label: "Media" },
     { href: "/contact", label: "Contact" },
