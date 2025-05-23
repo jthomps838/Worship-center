@@ -2,9 +2,9 @@
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { useState } from "react"
-import { Toaster } from "@/components/ui/toaster"
-import Navigation from "@/components/Navigation"
-import Footer from "@/components/Footer"
+import { Toaster } from "../components/ui/toaster"
+import Navigation from "../components/Navigation"
+import Footer from "../components/Footer"
 import "./globals.css"
 
 export default function RootLayout({ children }) {

@@ -123,7 +123,7 @@ export default function Media() {
               <BookOpen className="w-6 h-6 text-ocean-500" />
               Featured Content
             </h2>
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {featuredContent.map((item) => (
                 <Card key={item.id} className="border-2 border-ocean-200 hover:border-ocean-400 transition-colors shadow-lg">
                   <CardHeader className="bg-gradient-to-r from-ocean-500 to-navy-600 text-white">
@@ -179,13 +179,13 @@ export default function Media() {
             {regularContent.map((item) => (
               <Card key={item.id} className="border-2 border-navy-200 hover:border-ocean-400 transition-colors">
                 <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0">
-                      <div className="w-20 h-20 bg-gradient-to-br from-ocean-500 to-navy-600 rounded-lg flex items-center justify-center text-white">
+                  <div className="flex flex-col sm:flex-row items-start gap-4">
+                    <div className="flex-shrink-0 w-full sm:w-auto">
+                      <div className="w-full sm:w-20 h-20 bg-gradient-to-br from-ocean-500 to-navy-600 rounded-lg flex items-center justify-center text-white">
                         {getMediaIcon(item.type)}
                       </div>
                     </div>
-                    <div className="flex-1 min-w-0">
+                    <div className="flex-1 min-w-0 w-full">
                       <div className="flex items-start justify-between mb-2">
                         <h3 className="text-xl font-semibold text-navy-700 leading-tight">
                           {item.title}
