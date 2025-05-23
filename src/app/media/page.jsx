@@ -105,12 +105,12 @@ export default function Media() {
     <div className="min-h-screen bg-navy-50 py-12 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-12">
-          <Play className="w-12 h-12 mx-auto text-ocean-500 mb-4" />
-          <h1 className="text-4xl font-bold text-navy-700 mb-4">
+        <div className="text-center mb-8 sm:mb-12">
+          <Play className="w-10 sm:w-12 h-10 sm:h-12 mx-auto text-ocean-500 mb-4" />
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-navy-700 mb-4 px-4">
             Media Library
           </h1>
-          <p className="text-lg text-navy-600 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-navy-600 max-w-2xl mx-auto px-4 leading-relaxed">
             Encouraging content to strengthen your faith journey. Find sermons, devotionals, 
             testimonies, and worship resources to help you navigate life's storms.
           </p>
@@ -126,14 +126,14 @@ export default function Media() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {featuredContent.map((item) => (
                 <Card key={item.id} className="border-2 border-ocean-200 hover:border-ocean-400 transition-colors shadow-lg">
-                  <CardHeader className="bg-gradient-to-r from-ocean-500 to-navy-600 text-white">
-                    <div className="flex items-start justify-between">
+                  <CardHeader className="bg-gradient-to-r from-ocean-500 to-navy-600 text-white p-4 sm:p-6">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
                       <div className="flex-1">
-                        <CardTitle className="text-xl mb-2 flex items-center gap-2">
+                        <CardTitle className="text-lg sm:text-xl mb-2 flex items-center gap-2 leading-tight">
                           {getMediaIcon(item.type)}
-                          {item.title}
+                          <span className="break-words">{item.title}</span>
                         </CardTitle>
-                        <div className="flex items-center gap-4 text-sm opacity-90">
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-sm opacity-90">
                           <span className="flex items-center gap-1">
                             <Calendar className="w-4 h-4" />
                             {new Date(item.date).toLocaleDateString()}
@@ -144,7 +144,7 @@ export default function Media() {
                           </span>
                         </div>
                       </div>
-                      <Badge className="bg-white text-ocean-600 border-white">
+                      <Badge className="bg-white text-ocean-600 border-white self-start">
                         {item.category}
                       </Badge>
                     </div>
@@ -186,19 +186,19 @@ export default function Media() {
                       </div>
                     </div>
                     <div className="flex-1 min-w-0 w-full">
-                      <div className="flex items-start justify-between mb-2">
-                        <h3 className="text-xl font-semibold text-navy-700 leading-tight">
+                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
+                        <h3 className="text-lg sm:text-xl font-semibold text-navy-700 leading-tight break-words">
                           {item.title}
                         </h3>
-                        <Badge className={getTypeColor(item.type)}>
+                        <Badge className={`${getTypeColor(item.type)} flex-shrink-0`}>
                           {item.type}
                         </Badge>
                       </div>
-                      <p className="text-navy-600 mb-3 leading-relaxed">
+                      <p className="text-navy-600 mb-4 leading-relaxed text-sm sm:text-base">
                         {item.description}
                       </p>
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-4 text-sm text-navy-500">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-sm text-navy-500">
                           <span className="flex items-center gap-1">
                             <Calendar className="w-4 h-4" />
                             {new Date(item.date).toLocaleDateString()}
@@ -207,11 +207,11 @@ export default function Media() {
                             <Clock className="w-4 h-4" />
                             {item.duration}
                           </span>
-                          <Badge variant="outline" className="text-ocean-600 border-ocean-300">
+                          <Badge variant="outline" className="text-ocean-600 border-ocean-300 self-start">
                             {item.category}
                           </Badge>
                         </div>
-                        <Button variant="outline" className="border-ocean-500 text-ocean-600 hover:bg-ocean-50">
+                        <Button variant="outline" className="border-ocean-500 text-ocean-600 hover:bg-ocean-50 w-full sm:w-auto">
                           <Play className="w-4 h-4 mr-2" />
                           {item.type === 'article' ? 'Read' : 'Play'}
                         </Button>

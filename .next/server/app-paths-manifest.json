@@ -3,5 +3,6 @@
   "/page": "app/page.js",
   "/prayer-wall/page": "app/prayer-wall/page.js",
   "/about/page": "app/about/page.js",
-  "/media/page": "app/media/page.js"
+  "/media/page": "app/media/page.js",
+  "/contact/page": "app/contact/page.js"
 }
