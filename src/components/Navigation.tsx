@@ -18,8 +18,8 @@ export default function Navigation() {
   ];
 
   const isActive = (href: string) => {
-    if (href === "/" && location === "/") return true;
-    if (href !== "/" && location.startsWith(href)) return true;
+    if (href === "/" && pathname === "/") return true;
+    if (href !== "/" && pathname.startsWith(href)) return true;
     return false;
   };
 
@@ -53,7 +53,7 @@ export default function Navigation() {
                   {item.label}
                 </Link>
               ))}
-              <Link href="/prayer/submit">
+              <Link href="/prayer-submit">
                 <Button className="bg-ocean-500 hover:bg-ocean-600 text-white">
                   Submit Prayer
                 </Button>
