@@ -1,7 +1,5 @@
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { insertContactMessageSchema } from "../../../shared/schema.js";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
@@ -15,7 +13,6 @@ export default function Contact() {
   const { toast } = useToast();
 
   const form = useForm({
-    resolver: zodResolver(insertContactMessageSchema),
     defaultValues: {
       name: "",
       email: "",

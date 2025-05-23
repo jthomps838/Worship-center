@@ -1,8 +1,6 @@
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useLocation } from "wouter";
-import { insertPrayerRequestSchema } from "../../../shared/schema.js";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
@@ -19,7 +17,6 @@ export default function PrayerSubmit() {
   const queryClient = useQueryClient();
 
   const form = useForm({
-    resolver: zodResolver(insertPrayerRequestSchema),
     defaultValues: {
       name: "",
       email: "",
