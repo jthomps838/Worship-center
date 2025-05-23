@@ -9,6 +9,8 @@ import {
   type ContactMessage,
   type InsertContactMessage
 } from "@shared/schema";
+import { db } from "./db";
+import { eq } from "drizzle-orm";
 
 export interface IStorage {
   getUser(id: number): Promise<User | undefined>;
@@ -27,94 +29,79 @@ export interface IStorage {
   getContactMessages(): Promise<ContactMessage[]>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<number, User>;
-  private prayerRequests: Map<number, PrayerRequest>;
-  private contactMessages: Map<number, ContactMessage>;
-  private currentUserId: number;
-  private currentPrayerRequestId: number;
-  private currentContactMessageId: number;
-
-  constructor() {
-    this.users = new Map();
-    this.prayerRequests = new Map();
-    this.contactMessages = new Map();
-    this.currentUserId = 1;
-    this.currentPrayerRequestId = 1;
-    this.currentContactMessageId = 1;
-  }
-
+export class DatabaseStorage implements IStorage {
   async getUser(id: number): Promise<User | undefined> {
-    return this.users.get(id);
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user || undefined;
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user || undefined;
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const id = this.currentUserId++;
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
+    const [user] = await db
+      .insert(users)
+      .values(insertUser)
+      .returning();
     return user;
   }
 
   async createPrayerRequest(insertRequest: InsertPrayerRequest): Promise<PrayerRequest> {
-    const id = this.currentPrayerRequestId++;
-    const prayerRequest: PrayerRequest = {
-      ...insertRequest,
-      id,
-      status: "pending",
-      createdAt: new Date(),
-    };
-    this.prayerRequests.set(id, prayerRequest);
+    const [prayerRequest] = await db
+      .insert(prayerRequests)
+      .values(insertRequest)
+      .returning();
     return prayerRequest;
   }
 
   async getPrayerRequests(): Promise<PrayerRequest[]> {
-    return Array.from(this.prayerRequests.values()).sort(
-      (a, b) => (b.createdAt?.getTime() || 0) - (a.createdAt?.getTime() || 0)
-    );
+    return await db
+      .select()
+      .from(prayerRequests)
+      .orderBy((t) => t.createdAt);
   }
 
   async getPublicApprovedPrayerRequests(): Promise<PrayerRequest[]> {
-    return Array.from(this.prayerRequests.values())
-      .filter(request => request.isPublic && request.status === "approved")
-      .sort((a, b) => (b.createdAt?.getTime() || 0) - (a.createdAt?.getTime() || 0));
+    return await db
+      .select()
+      .from(prayerRequests)
+      .where(eq(prayerRequests.status, "approved"))
+      .orderBy((t) => t.createdAt);
   }
 
   async getPrayerRequest(id: number): Promise<PrayerRequest | undefined> {
-    return this.prayerRequests.get(id);
+    const [request] = await db
+      .select()
+      .from(prayerRequests)
+      .where(eq(prayerRequests.id, id));
+    return request || undefined;
   }
 
   async updatePrayerRequestStatus(id: number, status: string): Promise<PrayerRequest | undefined> {
-    const request = this.prayerRequests.get(id);
-    if (request) {
-      const updatedRequest = { ...request, status };
-      this.prayerRequests.set(id, updatedRequest);
-      return updatedRequest;
-    }
-    return undefined;
+    const [updatedRequest] = await db
+      .update(prayerRequests)
+      .set({ status })
+      .where(eq(prayerRequests.id, id))
+      .returning();
+    return updatedRequest || undefined;
   }
 
   async createContactMessage(insertMessage: InsertContactMessage): Promise<ContactMessage> {
-    const id = this.currentContactMessageId++;
-    const contactMessage: ContactMessage = {
-      ...insertMessage,
-      id,
-      createdAt: new Date(),
-    };
-    this.contactMessages.set(id, contactMessage);
+    const [contactMessage] = await db
+      .insert(contactMessages)
+      .values(insertMessage)
+      .returning();
     return contactMessage;
   }
 
   async getContactMessages(): Promise<ContactMessage[]> {
-    return Array.from(this.contactMessages.values()).sort(
-      (a, b) => (b.createdAt?.getTime() || 0) - (a.createdAt?.getTime() || 0)
-    );
+    return await db
+      .select()
+      .from(contactMessages)
+      .orderBy((t) => t.createdAt);
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();
