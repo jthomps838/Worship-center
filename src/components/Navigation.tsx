@@ -6,7 +6,7 @@ import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from 
 import { Anchor, Menu } from "lucide-react";
 
 export default function Navigation() {
-  const [location] = useLocation();
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
