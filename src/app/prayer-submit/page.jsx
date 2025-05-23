@@ -2,7 +2,7 @@
 
 import { useForm } from "react-hook-form"
 import { useMutation } from "@tanstack/react-query"
-import { useToast } from "@/hooks/use-toast"
+import { useToast } from "@/hooks/use-toast.jsx"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
