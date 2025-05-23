@@ -126,14 +126,14 @@ export default function Media() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {featuredContent.map((item) => (
                 <Card key={item.id} className="border-2 border-ocean-200 hover:border-ocean-400 transition-colors shadow-lg">
-                  <CardHeader className="bg-gradient-to-r from-ocean-500 to-navy-600 text-white p-4 sm:p-6">
+                  <CardHeader className="bg-gradient-to-r from-ocean-600 to-navy-700 text-white p-4 sm:p-6">
                     <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
                       <div className="flex-1">
-                        <CardTitle className="text-lg sm:text-xl mb-2 flex items-center gap-2 leading-tight">
+                        <CardTitle className="text-lg sm:text-xl mb-2 flex items-center gap-2 leading-tight font-bold">
                           {getMediaIcon(item.type)}
                           <span className="break-words">{item.title}</span>
                         </CardTitle>
-                        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-sm opacity-90">
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-sm text-gray-100">
                           <span className="flex items-center gap-1">
                             <Calendar className="w-4 h-4" />
                             {new Date(item.date).toLocaleDateString()}
@@ -144,7 +144,7 @@ export default function Media() {
                           </span>
                         </div>
                       </div>
-                      <Badge className="bg-white text-ocean-600 border-white self-start">
+                      <Badge className="bg-white text-navy-800 border-white self-start font-semibold">
                         {item.category}
                       </Badge>
                     </div>
@@ -279,14 +279,14 @@ export default function Media() {
 
         {/* Call to Action */}
         <section className="mt-16 text-center">
-          <div className="bg-gradient-to-r from-ocean-500 to-navy-600 text-white p-8 rounded-lg">
-            <h3 className="text-2xl font-bold mb-4">
+          <div className="bg-gradient-to-r from-ocean-600 to-navy-700 text-white p-8 rounded-lg shadow-lg">
+            <h3 className="text-2xl font-bold mb-4 text-white">
               Stay Connected with Our Latest Content
             </h3>
-            <p className="text-lg opacity-90 mb-6">
+            <p className="text-lg text-gray-100 mb-6 leading-relaxed">
               Get notified when we publish new sermons, devotionals, and encouraging resources.
             </p>
-            <Button size="lg" className="bg-white text-navy-700 hover:bg-navy-50">
+            <Button size="lg" className="bg-white text-navy-800 hover:bg-gray-100 font-semibold shadow-md">
               <ExternalLink className="w-5 h-5 mr-2" />
               Subscribe to Updates
             </Button>
